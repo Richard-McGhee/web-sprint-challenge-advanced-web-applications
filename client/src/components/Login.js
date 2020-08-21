@@ -23,7 +23,7 @@ const Login = () => {
     axios.post("http://localhost:5000/api/login", loginState)
     .then(res => {
       console.log(res)
-      localStorage.setItem("token", res.data.token)
+      localStorage.setItem("token", res.data.payload)
       push("/bubblepage")
     })
     .catch(err => console.dir(err))
@@ -35,7 +35,7 @@ const Login = () => {
         <input type="text"
         name="username"
         placeholder="Enter your username"
-        value={loginState.password}
+        value={loginState.username}
         onChange={handleChanges} />
         <input type="text"
         name="password"
