@@ -24,7 +24,7 @@ const BubblePage = () => {
 
   return (
     <>
-      <Link to="/">Home</Link>
+      {/* <Link to="/">Home</Link> */}
       <ColorList colors={colorList} updateColors={setColorList} update={update} />
       <Bubbles colors={colorList} />
     </>
