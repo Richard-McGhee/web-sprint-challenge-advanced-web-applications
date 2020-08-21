@@ -1,12 +1,11 @@
 import React from "react";
 import { render, screen, waitFor } from "@testing-library/react";
 import BubblePage from "./BubblePage";
-import { getColors as mockGetColors } from '../utilities/apiTests'
-import ColorList from "./ColorList";
+import * as all from '../utilities/apiUsage'
 
 jest.mock('../utilities/apiTests')
 
-const colorList = [
+const colorList = {data: [
   {
     color: 'aliceblue',
     code: {
@@ -35,14 +34,28 @@ const colorList = [
     },
     id: 4
   }
-]
+]}
+
+jest.mock('axios')
+const axios = require("axios")
+
+jest.mock("axios", () => ({
+  create: jest.fn(),
+  get: jest.fn()
+}))
+
 
 test("Fetches data and renders the bubbles", async () => {
   // Finish this test
-  mockGetColors.mockResolvedValueOnce(colorList)
+  const mockedAxiosWithAuth = jest.spyOn(all, "axiosWithAuth")
+
+  mockedAxiosWithAuth.mockImplementation(() => {
+    return axios
+  })
+
+  axios.get.mockResolvedValueOnce(colorList)
 
   render(<BubblePage />)
-  render(<ColorList colors={colorList}/>)
 
   await waitFor(() => {
     const specificBlue = screen.getByText(/aliceblue/i)

@@ -23,7 +23,7 @@ const ColorList = ({ colors, updateColors, update }) => {
     // where is is saved right now?
     axiosWithAuth().put(`http://localhost:5000/api/colors/${colorToEdit.id}`, colorToEdit)
     .then(res => {
-      console.log(res)
+      // console.log(res)
       update()
     })
     .catch(err => console.dir(err))
@@ -32,7 +32,7 @@ const ColorList = ({ colors, updateColors, update }) => {
   const deleteColor = color => {
     axiosWithAuth().delete(`http://localhost:5000/api/colors/${color.id}`)
     .then(res => {
-      console.log(res)
+      // console.log(res)
       update()
     })
     .catch(err => console.die(err))
